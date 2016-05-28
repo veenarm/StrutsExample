@@ -24,7 +24,7 @@ public class FileUploadForm extends ActionForm {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
 
-        if (getFile().getFileSize() == 0) {
+        if (getFile() == null || getFile().getFileSize() == 0) {
             errors.add("common.file.err", new ActionMessage("error.common.file.required"));
             return errors;
         }
@@ -34,7 +34,6 @@ public class FileUploadForm extends ActionForm {
             return errors;
         }
 
-        System.out.println(getFile().getFileSize());
         if (getFile().getFileSize() > 10240) { //10kb
             errors.add("common.file.err.size", new ActionMessage("error.common.file.size.limit", 10240));
             return errors;
